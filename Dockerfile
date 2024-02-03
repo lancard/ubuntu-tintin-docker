@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget -y
 RUN apt-get upgrade -y
 
-RUN wget https://github.com/lancard/tintin/raw/main/tintin%2B%2Bv1.86.tar.gz
+RUN wget https://github.com/lancard/tintin/raw/master/tintin%2B%2Bv1.86.tar.gz
 RUN tar xvzf tintin++v1.86.tar.gz
 RUN cp tt++ /bin/tt
 
