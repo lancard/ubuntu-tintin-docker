@@ -9,6 +9,10 @@ RUN apt-get upgrade -y
 
 RUN wget https://github.com/lancard/tintin/raw/master/tintin%2B%2Bv1.86.tar.gz
 RUN tar xvzf tintin++v1.86.tar.gz
+WORKDIR /root/tintin++/src
+RUN ./configure
+RUN make
+
 RUN cp tt++ /bin/tt
 
 WORKDIR /root/tintin++
