@@ -6,7 +6,7 @@ RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim
 RUN apt-get upgrade -y
 RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.UTF-8
 ENV LANG ko_KR.UTF-8
-RUN sudo ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/backup/love.tar.gz /home" > crontab.txt
