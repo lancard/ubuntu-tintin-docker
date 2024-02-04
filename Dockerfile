@@ -17,6 +17,6 @@ RUN wget https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive_2.1
 RUN tar xvzf gdrive_2.1.1_linux_386.tar.gz
 RUN cp gdrive /sbin
 
+COPY --chmod=755 docker-entrypoint.sh /
 
-
-ENTRYPOINT serivce openbsd-inetd start && /usr/bin/tail -f /dev/null
+ENTRYPOINT /docker-entrypoint.sh
