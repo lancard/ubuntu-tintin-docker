@@ -2,7 +2,7 @@ FROM ubuntu
 
 RUN ulimit -c unlimited
 RUN apt-get update
-RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron -y
+RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron ssh -y
 RUN apt-get upgrade -y
 RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.UTF-8
 ENV LANG ko_KR.UTF-8
