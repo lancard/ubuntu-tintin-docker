@@ -9,7 +9,7 @@ ENV LANG ko_KR.UTF-8
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 WORKDIR /root
-RUN echo "0 1 * * * tar czf /love.tar.gz /home /etc" > crontab.txt
+RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
 RUN echo "0 2 * * * apt-get update && apt-get upgrade -y" >> crontab.txt
 RUN cat crontab.txt | crontab -
 
