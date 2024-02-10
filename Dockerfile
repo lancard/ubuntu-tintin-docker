@@ -6,6 +6,7 @@ RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim
 RUN apt-get upgrade -y
 RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.EUC-KR
 ENV LANG ko_KR.EUC-KR
+RUN update-locale LANG=ko_KR.EUC-KR
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 RUN echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.conf
