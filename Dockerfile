@@ -8,6 +8,12 @@ RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.EUC-K
 ENV LANG ko_KR.EUC-KR
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
+RUN echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.default.disable_ipv6=1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.lo.disable_ipv6=1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.tcp_low_latency=1" >> /etc/sysctl.conf
+RUN sysctl -p
+
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
 RUN echo "0 2 * * * apt-get update && apt-get upgrade -y" >> crontab.txt
