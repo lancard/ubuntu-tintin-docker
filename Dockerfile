@@ -20,7 +20,6 @@ RUN ./configure
 RUN make
 RUN cp tt++ /bin/tt
 
-
 WORKDIR /
 COPY --chmod=755 docker-entrypoint.sh /
 
