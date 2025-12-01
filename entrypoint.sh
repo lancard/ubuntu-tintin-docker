@@ -5,6 +5,8 @@ term_handler() {
     exit 0
 }
 
+trap 'term_handler' SIGTERM SIGINT
+
 ln -sf /etc-account/passwd /etc/passwd
 ln -sf /etc-account/shadow /etc/shadow
 ln -sf /etc-account/group /etc/group
