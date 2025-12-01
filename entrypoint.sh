@@ -1,11 +1,4 @@
-#!/bin/sh
-
-term_handler() {
-    kill -TERM "$child" 2>/dev/null || true
-    exit 0
-}
-
-trap 'term_handler' SIGTERM SIGINT
+#!/bin/bash
 
 ln -sf /etc-account/passwd /etc/passwd
 ln -sf /etc-account/shadow /etc/shadow
@@ -18,6 +11,4 @@ service ssh start
 
 echo love > /etc/hostname
 
-tail -f /dev/null &
-child=$!
-wait "$child"
+tail -f /dev/null
