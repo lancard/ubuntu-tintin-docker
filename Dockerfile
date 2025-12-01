@@ -8,28 +8,34 @@ RUN apt-get update
 RUN apt-get install -y locales gcc make lrzsz libreadline-dev net-tools vim telnetd-ssl telnet-ssl ftp file screen wget git cron ssh tini
 RUN apt-get upgrade -y
 
-ENV TZ=Asia/Seoul
+# language
 ENV LANG=ko_KR.EUC-KR
 ENV LANGUAGE=ko_KR:ko
 ENV LC_ALL=ko_KR.EUC-KR
-RUN sed -i 's/^# ko_KR.EUC-KR EUC-KR/ko_KR.EUC-KR EUC-KR/' /etc/locale.gen && locale-gen $LANG && update-locale LANG=$LANG
+RUN sed -i 's/^# ko_KR.EUC-KR EUC-KR/ko_KR.EUC-KR EUC-KR/' /etc/locale.gen && locale-gen && update-locale LANG=$LANG
 RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.EUC-KR
-RUN update-locale LANG=ko_KR.EUC-KR
+
+# timezone
+ENV TZ=Asia/Seoul
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
+# disable ipv6 and set tcp
 RUN echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.lo.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.tcp_low_latency=1" >> /etc/sysctl.conf
 
+# enable telnet
 RUN echo "telnet stream tcp nowait root /usr/sbin/in.telnetd -z nossl" >> /etc/inetd.conf
 
+# install crontab
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
 RUN echo "0 2 * * * apt-get update && apt-get upgrade -y" >> crontab.txt
 RUN echo "0 3 1 * * kill 1" >> crontab.txt
 RUN cat crontab.txt | crontab -
 
+# build tintin
 WORKDIR /root
 RUN git clone https://github.com/lancard/tintin.git
 WORKDIR /root/tintin/src
