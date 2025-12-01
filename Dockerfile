@@ -1,11 +1,19 @@
 FROM ubuntu
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN ulimit -c unlimited
+
 RUN apt-get update
-RUN apt-get install locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron ssh -y
+RUN apt-get install -y locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron ssh
 RUN apt-get upgrade -y
+
+ENV TZ=Asia/Seoul
+ENV LANG=ko_KR.EUC-KR
+ENV LANGUAGE=ko_KR:ko
+ENV LC_ALL=ko_KR.EUC-KR
+RUN sed -i 's/^# ko_KR.EUC-KR EUC-KR/ko_KR.EUC-KR EUC-KR/' /etc/locale.gen && locale-gen $LANG && update-locale LANG=$LANG
 RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.EUC-KR
-ENV LANG ko_KR.EUC-KR
 RUN update-locale LANG=ko_KR.EUC-KR
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
