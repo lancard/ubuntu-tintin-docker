@@ -22,7 +22,7 @@ RUN echo "net.ipv6.conf.default.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.lo.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.tcp_low_latency=1" >> /etc/sysctl.conf
 
-RUN echp "telnet stream tcp nowait root /usr/sbin/in.telnetd -z nossl" >> /etc/inetd.conf
+RUN echo "telnet stream tcp nowait root /usr/sbin/in.telnetd -z nossl" >> /etc/inetd.conf
 
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
