@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN ulimit -c unlimited
 
 RUN apt-get update
-RUN apt-get install -y locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron ssh
+RUN apt-get install -y locales gcc make lrzsz telnetd libreadline-dev net-tools vim telnet ftp file screen wget git cron ssh tini
 RUN apt-get upgrade -y
 
 ENV TZ=Asia/Seoul
@@ -40,4 +40,5 @@ RUN cp tt++ /bin/tt
 WORKDIR /
 COPY --chmod=755 entrypoint.sh /
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["/entrypoint.sh"]
