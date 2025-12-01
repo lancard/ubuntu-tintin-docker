@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 term_handler() {
     kill -TERM "$child" 2>/dev/null || true
