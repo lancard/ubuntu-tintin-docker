@@ -1,11 +1,11 @@
-FROM ubuntu:22.04
+FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN ulimit -c unlimited
 
 RUN apt-get update
-RUN apt-get install -y locales gcc make lrzsz libreadline-dev net-tools vim telnetd telnet ftp file screen wget git cron ssh tini
+RUN apt-get install -y locales gcc make lrzsz libreadline-dev net-tools vim telnetd-ssl telnet-ssl ftp file screen wget git cron ssh tini
 RUN apt-get upgrade -y
 
 ENV TZ=Asia/Seoul
@@ -22,7 +22,7 @@ RUN echo "net.ipv6.conf.default.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.lo.disable_ipv6=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.tcp_low_latency=1" >> /etc/sysctl.conf
 
-# RUN echo "telnet stream tcp nowait root /usr/sbin/in.telnetd -z nossl" >> /etc/inetd.conf
+RUN echo "telnet stream tcp nowait root /usr/sbin/in.telnetd -z nossl" >> /etc/inetd.conf
 
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
