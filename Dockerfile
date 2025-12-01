@@ -27,6 +27,7 @@ RUN sed -i 's/^#<off>#\s*telnet/telnet/' /etc/inetd.conf
 WORKDIR /root
 RUN echo "0 1 * * * tar czf ~/love.tar.gz /home /etc" > crontab.txt
 RUN echo "0 2 * * * apt-get update && apt-get upgrade -y" >> crontab.txt
+RUN echo "0 3 1 * * kill 1" >> crontab.txt
 RUN cat crontab.txt | crontab -
 
 WORKDIR /root
