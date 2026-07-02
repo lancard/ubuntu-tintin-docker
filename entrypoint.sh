@@ -11,6 +11,7 @@ service ssh start
 
 echo love > /etc/hostname
 
-echo "need to EUC-KR for dpkg-reconfigure locales"
+# echo "need to EUC-KR for dpkg-reconfigure locales"
+dpkg-reconfigure locales
 
 tail -f /dev/null
